@@ -1,3 +1,14 @@
 apiVersion: v1
-entries: {}
-generated: "2023-02-03T19:25:05.653551-03:00"
+entries:
+  hoop:
+  - apiVersion: v2
+    appVersion: 1.1.17
+    created: "2023-02-03T19:27:56.10635-03:00"
+    description: A Helm chart for Hoop
+    digest: cf42cfa3dc38dfc92d69a4cd3d08ff0300abf7c4cdecbe450629f5e4ab2d32b4
+    name: hoop
+    type: application
+    urls:
+    - https://hoophq.github.io/helm-chart/hoop-0.0.1.tgz
+    version: 0.0.1
+generated: "2023-02-03T19:27:56.105799-03:00"
