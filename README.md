@@ -22,11 +22,11 @@ config:
 
 # hoop gateway configuration. Please refer to https://hoop.dev/docs/configuring/gateway
 xtdbConfig:
-  PG_HOST: null
+  PG_HOST: ''
   PG_PORT: "5432"
-  PG_USER: null
-  PG_PASSWORD: null
-  PG_DB: null
+  PG_USER: ''
+  PG_PASSWORD: ''
+  PG_DB: ''
 
 # use latest docker image or pin the version
 image:
