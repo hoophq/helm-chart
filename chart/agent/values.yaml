@@ -1,0 +1,28 @@
+## Default values for hoop.
+## This is a YAML-formatted file.
+## Declare variables to be passed into your templates.
+
+image:
+  repository: hoophq/hoopdev
+  pullPolicy: Always
+  tag: latest
+
+
+# hoop agent configuration. Please refer to https://hoop.dev/docs/configuring/agent
+config: {}
+  # AUTO_REGISTER: myorg
+  # TOKEN: x-agt-token
+  # SERVER_ADDRESS: hoop.yourdomain.tld
+
+# -- Deployment strategy
+deploymentStrategy:
+  type: Recreate
+
+# -- CPU/Memory resource requests/limits
+# resources:
+#   limits:
+#     cpu: 1024m
+#     memory: 1Gi
+#   requests:
+#     cpu: 1024m
+#     memory: 1Gi
