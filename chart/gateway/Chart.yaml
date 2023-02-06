@@ -3,4 +3,3 @@ name: hoop-chart
 description: A Helm chart for Hoop
 type: application
 version: 0.0.1
-appVersion: "1.1.18"
