@@ -1,26 +1,53 @@
 # Hoop Helm Chart
 
-TODO
-
-## Usage
+- Website: https://hoop.dev
+- Documentation: https://hoop.dev/docs
 
 [Helm](https://helm.sh) must be installed to use the chart.
 Please refer to Helm's [documentation](https://helm.sh/docs/) to get started.
 
-### Get the Repo of Hoop
+## Installing the Chart
 
-```console
+Installing hoop, check the release version at https://github.com/hoophq/hoopcli/releases
 
-helm repo add hoopdev https://hoophq.github.io/helm-chart
+```sh
+VERSION=
+cat - > ./values.yaml <<EOF
+# hoop gateway configuration. Please refer to https://hoop.dev/docs/configuring/gateway
+config:
+  API_URL: ''
+  IDP_ISSUER: ''
+  IDP_CLIENT_ID: ''
+  IDP_CLIENT_SECRET: ''
 
+# hoop gateway configuration. Please refer to https://hoop.dev/docs/configuring/gateway
+xtdbConfig:
+  PG_HOST: null
+  PG_PORT: "5432"
+  PG_USER: null
+  PG_PASSWORD: null
+  PG_DB: null
+
+# use latest docker image or pin the version
+image:
+  gw:
+    tag: latest
+  xtdb:
+    tag: latest
+  agent:
+    tag: latest
+EOF
+helm install -f values.yaml \
+    hoop https://hoopartifacts.s3.amazonaws.com/release/$VERSION/hoop-chart-$VERSION.tgz
 ```
 
-### Installing the Chart
+Installing hoop agent
 
-To install the chart
 
-```console
-
-helm install hoopdev/gateway -n hooptest --create-namespace
-
+```sh
+# Please refer to https://hoop.dev/docs/configuring/agent
+helm install hoop https://hoopartifacts.s3.amazonaws.com/release/$VERSION/hoopagent-chart-$VERSION.tgz \
+    --set 'config.SERVER_ADDRESS='
 ```
+
+> Leave SERVER_ADDDRESS empty if isn't a self-hosted installation
