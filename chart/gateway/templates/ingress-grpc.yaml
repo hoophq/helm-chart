@@ -21,6 +21,9 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: hoopgateway
-          servicePort: 8010
+          service:
+            name: hoopgateway
+            port:
+              number: 8010
+        pathType: ImplementationSpecific
 {{- end }}
