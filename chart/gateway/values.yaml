@@ -63,7 +63,7 @@ ingressGrpc:
 persistence:
   # -- Use persistent volume for write ahead log sessions
   enabled: false
-  # storageClassName: gp2|default
+  storageClassName: null
 
   # -- Size of persistent volume claim
   size: 10Gi
