@@ -1,4 +1,6 @@
-Hoop Dev, save me
+Gateway deployed
 
-Document Link:
-https://hoop.dev/docs/
+Visit {{ .Values.config.API_URL }} to begin.
+
+Documentation:
+https://hoop.dev/docs/configuring/gateway
