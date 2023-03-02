@@ -28,10 +28,12 @@ spec:
         - secretRef:
             name: hoop-config
         resources:
-          {{- toYaml .Values.resources | nindent 10 }}
+          {{- toYaml .Values.resources.gw | nindent 10 }}
+        {{- if .Values.persistence.enabled }}
         volumeMounts:
         - mountPath: /opt/hoop/sessions
-          name: sessions
+          name: walsessions
+        {{ end -}}
         ports:
         - containerPort: 8010
           name: grpc
@@ -44,17 +46,24 @@ spec:
         - secretRef:
             name: xtdb-config
         resources:
-          {{- toYaml .Values.resources | nindent 10 }}
+          {{- toYaml .Values.resources.xtdb | nindent 10 }}
         ports:
         - containerPort: 3001
           name: api
       - image: "{{ .Values.image.agent.repository }}:{{ .Values.image.agent.tag }}"
         name: defaultagent
         imagePullPolicy: {{ .Values.image.agent.pullPolicy }}
+        {{- if .Values.persistence.enabled }}
+        volumeMounts:
+        - mountPath: /opt/hoop/sessions
+          name: walsessions
+        {{ end -}}
         envFrom:
         - secretRef:
             name: defaultagent-config
+      {{- if .Values.persistence.enabled }}
       volumes:
-      - name: sessions
-        emptyDir:
-          sizeLimit: 10Gi
+      - name: walsessions
+        persistentVolumeClaim:
+          claimName: {{ .Values.persistence.existingClaim | default "walsessions" }}
+      {{ end -}}

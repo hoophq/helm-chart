@@ -60,15 +60,34 @@ ingressGrpc:
   # -- Ingress hostname for gRPC
   # host: hoop.yourdomain.tld
 
+persistence:
+  # -- Use persistent volume for write ahead log sessions
+  enabled: false
+  # storageClassName: gp2|default
+
+  # -- Size of persistent volume claim
+  size: 10Gi
+  # annotations: {}
+  # existingClaim:
+
 # -- Deployment strategy
 deploymentStrategy:
   type: Recreate
 
 # -- CPU/Memory resource requests/limits
-# resources:
-#   limits:
-#     cpu: 1024m
-#     memory: 1Gi
-#   requests:
-#     cpu: 1024m
-#     memory: 1Gi
+resources:
+  # xtdb requires a default requests/limits to avoid crashes
+  xtdb:
+    limits:
+      cpu: 1024m
+      memory: 1Gi
+    requests:
+      cpu: 1024m
+      memory: 1Gi
+  # gw:
+  #   limits:
+  #     cpu: 1024m
+  #     memory: 1Gi
+  #   requests:
+  #     cpu: 1024m
+  #     memory: 1Gi
