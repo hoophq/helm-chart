@@ -68,7 +68,6 @@ persistence:
   # -- Size of persistent volume claim
   size: 10Gi
   # annotations: {}
-  # existingClaim:
 
 # -- Deployment strategy
 deploymentStrategy:
