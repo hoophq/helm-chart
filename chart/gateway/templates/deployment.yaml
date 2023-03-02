@@ -11,6 +11,8 @@ spec:
   {{- end }}
   template:
     metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/secret-configs.yaml") . | sha256sum }}
       labels:
         app: hoopgateway
     spec:

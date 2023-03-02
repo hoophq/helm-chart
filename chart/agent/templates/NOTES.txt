@@ -1,4 +1,23 @@
-Hoop Dev, save me
+{{- if .Values.config.TOKEN -}}
+Agent deployed
 
-Document Link:
-https://hoop.dev/docs/
+The agent should be connected if the TOKEN is valid.
+Now you can create connections and associate with this instance
+Check it out https://hoop.dev/docs/connections/
+
+Documentation:
+https://hoop.dev/docs/configuring/agent
+{{- end }}
+
+{{- if not .Values.config.TOKEN -}}
+Agent deployed (web registration)
+
+This instance doesn't provide any static TOKEN, access the logs to view the register link URL
+$ kubectl logs -n {{ .Release.Namespace }} deployment/hoopagent
+
+After registering it, persist the token upgrading this release
+$ helm upgrade -n {{ .Release.Namespace }} {{ .Release.Name }} <CHART-URL> --set config.TOKEN=<x-agt-...>
+
+Documentation:
+https://hoop.dev/docs/configuring/agent
+{{- end }}
