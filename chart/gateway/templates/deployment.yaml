@@ -33,7 +33,7 @@ spec:
         volumeMounts:
         - mountPath: /opt/hoop/sessions
           name: walsessions
-        {{ end -}}
+        {{- end }}
         ports:
         - containerPort: 8010
           name: grpc
@@ -57,7 +57,7 @@ spec:
         volumeMounts:
         - mountPath: /opt/hoop/sessions
           name: walsessions
-        {{ end -}}
+        {{- end }}
         envFrom:
         - secretRef:
             name: defaultagent-config
