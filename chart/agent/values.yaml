@@ -13,6 +13,8 @@ config: {}
   # AUTO_REGISTER: myorg
   # TOKEN: x-agt-token
   # SERVER_ADDRESS: hoop.yourdomain.tld
+  # LOG_ENCODING: json
+  # LOG_LEVEL: info
 
 # -- Deployment strategy
 deploymentStrategy:
