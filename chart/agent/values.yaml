@@ -10,9 +10,6 @@ image:
 
 # hoop agent configuration. Please refer to https://hoop.dev/docs/configuring/agent
 config:
-  # enables a sidecar agent to the gateway.
-  # it must be able to auto register itself or connect it using a grpc_url and token
-  enabled: false
   # gateway:
   #   grpc_url: '<HOST:PORT>'
   #   tls_server_name: ''
