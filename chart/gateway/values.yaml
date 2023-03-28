@@ -18,10 +18,18 @@ image:
 
 
 # hoop agent configuration. Please refer to https://hoop.dev/docs/configuring/agent
-agentConfig: {}
+agentConfig:
+  # enables a sidecar agent to the gateway.
+  # it must be able to auto register itself or connect it using a grpc_url and token
+  enabled: false
+  # gateway:
+  #   grpc_url: '<HOST:PORT>'
+  #   tls_server_name: ''
+  #   token: ''
   # AUTO_REGISTER: myorg
-  # TOKEN: x-agt-token
-  # SERVER_ADDRESS: hoop.yourdomain.tld
+  # LOG_LEVEL: 'debug|info|warn|error'
+  # LOG_GRPC: "0|1|2"
+  # TLS_SERVER_NAME: ""
 
 # hoop gateway configuration. Please refer to https://hoop.dev/docs/configuring/gateway
 config:
@@ -29,9 +37,11 @@ config:
   IDP_ISSUER: null
   IDP_CLIENT_ID: null
   IDP_CLIENT_SECRET: null
+  IDP_AUDIENCE: null
   # GIN_MODE: 'release|debug'
   # LOG_ENCODING: 'console|json'
   # LOG_LEVEL: 'debug|info|warn|error'
+  # LOG_GRPC: "0|1|2"
   # IDP_AUDIENCE: ''
   # IDP_CUSTOM_SCOPES: ''
   # PLUGIN_AUDIT_PATH: ''
@@ -51,7 +61,7 @@ xtdbConfig:
   
 ingressApi:
   # -- Enables Ingress
-  enabled: false
+  enabled: true
   # -- Ingress annotations (values are templated)
   annotations:
     # kubernetes.io/ingress.class: nginx

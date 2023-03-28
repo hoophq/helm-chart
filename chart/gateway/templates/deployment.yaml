@@ -50,6 +50,7 @@ spec:
         ports:
         - containerPort: 3001
           name: api
+      {{- if and .Values.agentConfig.enabled }}
       - image: "{{ .Values.image.agent.repository }}:{{ .Values.image.agent.tag }}"
         name: defaultagent
         imagePullPolicy: {{ .Values.image.agent.pullPolicy }}
@@ -61,6 +62,7 @@ spec:
         envFrom:
         - secretRef:
             name: defaultagent-config
+      {{ end -}}
       {{- if .Values.persistence.enabled }}
       volumes:
       - name: walsessions

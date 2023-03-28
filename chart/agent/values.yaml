@@ -9,12 +9,18 @@ image:
 
 
 # hoop agent configuration. Please refer to https://hoop.dev/docs/configuring/agent
-config: {}
+agentConfig:
+  # enables a sidecar agent to the gateway.
+  # it must be able to auto register itself or connect it using a grpc_url and token
+  enabled: false
+  # gateway:
+  #   grpc_url: '<HOST:PORT>'
+  #   tls_server_name: ''
+  #   token: ''
   # AUTO_REGISTER: myorg
-  # TOKEN: x-agt-token
-  # SERVER_ADDRESS: hoop.yourdomain.tld
-  # LOG_ENCODING: json
-  # LOG_LEVEL: info
+  # LOG_LEVEL: 'debug|info|warn|error'
+  # LOG_GRPC: "0|1|2"
+  # TLS_SERVER_NAME: ""
 
 # -- Deployment strategy
 deploymentStrategy:
