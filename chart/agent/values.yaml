@@ -9,7 +9,7 @@ image:
 
 
 # hoop agent configuration. Please refer to https://hoop.dev/docs/configuring/agent
-agentConfig:
+config:
   # enables a sidecar agent to the gateway.
   # it must be able to auto register itself or connect it using a grpc_url and token
   enabled: false

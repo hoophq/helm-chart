@@ -20,6 +20,7 @@ config:
   IDP_ISSUER: ''
   IDP_CLIENT_ID: ''
   IDP_CLIENT_SECRET: ''
+  IDP_AUDIENCE: ''
 
 xtdbConfig:
   PG_HOST: ''
