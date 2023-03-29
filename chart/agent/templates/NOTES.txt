@@ -1,23 +1,25 @@
-{{- if .Values.config.TOKEN -}}
+{{- if .Values.config.gateway.token -}}
 Agent deployed
 
-The agent should be connected if the TOKEN is valid.
+The agent should be connected if the provided token is valid.
 Now you can create connections and associate with this instance
 Check it out https://hoop.dev/docs/connections/
 
 Documentation:
 https://hoop.dev/docs/configuring/agent
-{{- end }}
+{{- else }}
+Agent deployed - Web Registration
 
-{{- if not .Values.config.TOKEN -}}
-Agent deployed (web registration)
-
-This instance doesn't provide any static TOKEN, access the logs to view the register link URL
+This instance doesn't provide any static token. Access the logs to get the registration URL.
 $ kubectl logs -n {{ .Release.Namespace }} deployment/hoopagent
 
-After registering it, persist the token upgrading this release
-$ helm upgrade -n {{ .Release.Namespace }} {{ .Release.Name }} <CHART-URL> --set config.TOKEN=<x-agt-...>
+After registering it, redeploy the instance persisting the new token
+$ helm upgrade -n {{ .Release.Namespace }} {{ .Release.Name }} <CHART-URL> \
+    --set config.gateway.gateway.grpc_url=https://app.hoop.dev:8443 \
+    --set config.gateway.gateway.token=<x-agt-...>
+
+For self-hosted installations make sure to change the grpc_url pointing to your hoop gateway instance gRPC address.
+{{- end }}
 
 Documentation:
 https://hoop.dev/docs/configuring/agent
-{{- end }}

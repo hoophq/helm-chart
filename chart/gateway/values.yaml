@@ -22,14 +22,13 @@ agentConfig:
   # enables a sidecar agent to the gateway.
   # it must be able to auto register itself or connect it using a grpc_url and token
   enabled: false
-  # gateway:
-  #   grpc_url: '<HOST:PORT>'
+  gateway: {}
+  #   grpc_url: ''
   #   tls_server_name: ''
   #   token: ''
   # AUTO_REGISTER: myorg
   # LOG_LEVEL: 'debug|info|warn|error'
   # LOG_GRPC: "0|1|2"
-  # TLS_SERVER_NAME: ""
 
 # hoop gateway configuration. Please refer to https://hoop.dev/docs/configuring/gateway
 config:

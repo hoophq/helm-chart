@@ -10,14 +10,13 @@ image:
 
 # hoop agent configuration. Please refer to https://hoop.dev/docs/configuring/agent
 config:
-  # gateway:
-  #   grpc_url: '<HOST:PORT>'
+  gateway: {}
+  #   grpc_url: ''
   #   tls_server_name: ''
   #   token: ''
   # AUTO_REGISTER: myorg
   # LOG_LEVEL: 'debug|info|warn|error'
   # LOG_GRPC: "0|1|2"
-  # TLS_SERVER_NAME: ""
 
 # -- Deployment strategy
 deploymentStrategy:
