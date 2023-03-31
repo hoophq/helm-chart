@@ -16,6 +16,7 @@ metadata:
     app: hoopgateway-grpc
   name: hoopgateway-grpc
 spec:
+  ingressClassName: {{ required "ingressGrpc.ingressClassName is required" .Values.ingressGrpc.ingressClassName | quote }}
   rules:
   - host: {{ required "ingressGrpc.host is required" .Values.ingressGrpc.host | quote }}
     http:
@@ -26,4 +27,10 @@ spec:
             port:
               number: 8010
         pathType: ImplementationSpecific
+  {{- if .Values.ingressGrpc.tlsSecret }}
+  tls:
+  - secretName: {{ .Values.ingressGrpc.tlsSecret }}
+    hosts:
+      - {{ .Values.ingressGrpc.host }}
+  {{- end }}
 {{- end }}

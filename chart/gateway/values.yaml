@@ -22,13 +22,15 @@ agentConfig:
   # enables a sidecar agent to the gateway.
   # it must be able to auto register itself or connect it using a grpc_url and token
   enabled: false
+  AUTO_REGISTER: ''
+  # debug|info|warn|error
+  LOG_LEVEL: info
+  # 0|1|2
+  LOG_GRPC: '0'
   gateway: {}
   #   grpc_url: ''
   #   tls_server_name: ''
   #   token: ''
-  # AUTO_REGISTER: myorg
-  # LOG_LEVEL: 'debug|info|warn|error'
-  # LOG_GRPC: "0|1|2"
 
 # hoop gateway configuration. Please refer to https://hoop.dev/docs/configuring/gateway
 config:
@@ -60,25 +62,29 @@ xtdbConfig:
   
 ingressApi:
   # -- Enables Ingress
-  enabled: true
+  enabled: false
+  # ingressClassName: ''
   # -- Ingress annotations (values are templated)
   annotations:
-    # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
 
   # -- Ingress hostname for API
   # host: hoop.yourdomain.tld
+  # -- TLS secret name for nginx ingress
+  # tlsSecret: ''
 
 ingressGrpc:
   # -- Enables Ingress
   enabled: false
+  # ingressClassName: ''
   # -- Ingress annotations (values are templated)
   annotations:
-    # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
 
   # -- Ingress hostname for gRPC
   # host: hoop.yourdomain.tld
+  # -- TLS secret name for nginx ingress
+  # tlsSecret: ''
 
 persistence:
   # -- Use persistent volume for write ahead log sessions

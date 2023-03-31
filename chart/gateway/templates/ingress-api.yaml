@@ -16,6 +16,7 @@ metadata:
     app: hoopgateway-web
   name: hoopgateway-web
 spec:
+  ingressClassName: {{ required "ingressApi.ingressClassName is required" .Values.ingressApi.ingressClassName | quote }}
   rules:
   - host: {{ required ".ingressApi.host is required" .Values.ingressApi.host | quote }}
     http:
@@ -26,4 +27,10 @@ spec:
             port:
               number: 8009
         pathType: ImplementationSpecific
+  {{- if .Values.ingressApi.tlsSecret }}
+  tls:
+  - secretName: {{ .Values.ingressApi.tlsSecret }}
+    hosts:
+      - {{ .Values.ingressApi.host }}
+  {{- end }}
 {{- end }}
