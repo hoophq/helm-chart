@@ -63,7 +63,7 @@ xtdbConfig:
 ingressApi:
   # -- Enables Ingress
   enabled: false
-  # ingressClassName: ''
+  ingressClassName: ''
   # -- Ingress annotations (values are templated)
   annotations:
     # kubernetes.io/tls-acme: "true"
@@ -76,7 +76,7 @@ ingressApi:
 ingressGrpc:
   # -- Enables Ingress
   enabled: false
-  # ingressClassName: ''
+  ingressClassName: ''
   # -- Ingress annotations (values are templated)
   annotations:
     # kubernetes.io/tls-acme: "true"

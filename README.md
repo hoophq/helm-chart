@@ -15,20 +15,6 @@ Installing latest version of hoop. For different version check out the [releases
 ```sh
 
 cat - > ./values.yaml <<EOF
-config:
-  API_URL: ''
-  IDP_ISSUER: ''
-  IDP_CLIENT_ID: ''
-  IDP_CLIENT_SECRET: ''
-  IDP_AUDIENCE: ''
-
-xtdbConfig:
-  PG_HOST: ''
-  PG_PORT: '5432'
-  PG_USER: ''
-  PG_PASSWORD: ''
-  PG_DB: ''
-
 # use latest docker image or pin the version
 image:
   gw:
@@ -37,9 +23,61 @@ image:
     tag: latest
   agent:
     tag: latest
+
+# gateway configuration
+config:
+  API_URL: ''
+  IDP_ISSUER: ''
+  IDP_CLIENT_ID: ''
+  IDP_CLIENT_SECRET: ''
+  IDP_AUDIENCE: ''
+
+# enable a default agent running as a sidecard in the gateway
+agentConfig:
+  enabled: true
+  AUTO_REGISTER: 'true'
+
+# gateway database configuration
+xtdbConfig:
+  PG_HOST: ''
+  PG_PORT: '5432'
+  PG_USER: ''
+  PG_PASSWORD: ''
+  PG_DB: ''
+
+# gateway persistence for audits
+persistence:
+  enabled: false
+  storageClassName: ''
+
+# enable ingress for the api / webapp services
+ingressApi:
+  enabled: false
+  ingressClassName: nginx
+  annotations: {}
+    # kubernetes.io/tls-acme: "true"
+
+  host: hoop.yourdomain.tld
+  # -- TLS secret name for nginx ingress
+  # tlsSecret: ''
+
+# enable ingress for the gRPC service
+ingressGrpc:
+  enabled: false
+  ingressClassName: nginx
+  annotations: {}
+    # kubernetes.io/tls-acme: "true"
+
+  host: hoop.yourdomain.tld
+  # -- TLS secret name for nginx ingress
+  # tlsSecret: ''
 EOF
+```
+
+```sh
 VERSION=$(curl -s https://hoopartifacts.s3.amazonaws.com/release/latest.txt)
-helm install hoop https://hoopartifacts.s3.amazonaws.com/release/$VERSION/hoop-chart-$VERSION.tgz \
+helm upgrade --install hoop \
+  https://hoopartifacts.s3.amazonaws.com/release/$VERSION/hoop-chart-$VERSION.tgz \
   -f values.yaml
 ```
 
@@ -49,8 +87,11 @@ Installing hoop agent
 
 ```sh
 VERSION=$(curl -s https://hoopartifacts.s3.amazonaws.com/release/latest.txt)
-helm install hoopagent https://hoopartifacts.s3.amazonaws.com/release/$VERSION/hoopagent-chart-$VERSION.tgz \
-    --set 'config.SERVER_ADDRESS='
+helm upgrade --install hoopagent https://hoopartifacts.s3.amazonaws.com/release/$VERSION/hoopagent-chart-$VERSION.tgz \
+    --set 'config.gateway.grpc_url=' \
+    --set 'config.gateway.token='
 ```
 
-> Leave SERVER_ADDDRESS empty if isn't a self-hosted installation
+
+> The gRPC url of our SaaS instance is configured as https://app.hoop.dev:8443.
+> If you have your own gateway, provide a valid public address for the option `config.gateway.grpc_url`
