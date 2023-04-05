@@ -6,7 +6,7 @@
 [Helm](https://helm.sh) must be installed to use the chart.
 Please refer to Helm's [documentation](https://helm.sh/docs/) to get started.
 
-## Installing the Chart
+## Installing Self Hosted
 
 Installing latest version of hoop. For different version check out the [releases page](https://github.com/hoophq/hoopcli/releases)
 
@@ -81,9 +81,9 @@ helm upgrade --install hoop \
   -f values.yaml
 ```
 
-Installing hoop agent
+## Installing Hoop Agent
 
-> Please refer to [agent configuration reference](https://hoop.dev/docs/configuring/agent) for more information.
+Please refer to [agent configuration reference](https://hoop.dev/docs/configuring/agent) for more information.
 
 ```sh
 VERSION=$(curl -s https://hoopartifacts.s3.amazonaws.com/release/latest.txt)
