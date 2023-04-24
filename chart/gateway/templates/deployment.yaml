@@ -50,6 +50,10 @@ spec:
         ports:
         - containerPort: 3001
           name: api
+        lifecycle:
+          preStop:
+            exec:
+              command: ["/bin/sh","-c","until stat /tmp/xtdb-shutdown.placeholder 2>/dev/null; do sleep 1; done"]
       {{- if and .Values.agentConfig.enabled }}
       - image: "{{ .Values.image.agent.repository }}:{{ .Values.image.agent.tag }}"
         name: defaultagent
