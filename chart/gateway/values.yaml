@@ -51,6 +51,9 @@ config:
   # SMTP_PORT: ''
   # SMTP_USER: ''
   # SMTP_PASS: ''
+  notification: {}
+    # slackBotToken: ''
+    # bridgeUrl: ''
 
 # hoop gateway configuration. Please refer to https://hoop.dev/docs/configuring/gateway
 xtdbConfig:
@@ -59,6 +62,10 @@ xtdbConfig:
   PG_USER: null
   PG_PASSWORD: null
   PG_DB: null
+  LISTEN_ADDR: '127.0.0.1'
+  ROCKS_DB_CACHE_SIZE: '536870912' # 512MB
+  ROCKS_DB_DIR: '/opt/hoop/sessions/rocksdb'
+  # JVM_OPTS: ''
   
 ingressApi:
   # -- Enables Ingress
