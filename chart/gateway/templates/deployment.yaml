@@ -50,6 +50,11 @@ spec:
         ports:
         - containerPort: 3001
           name: api
+        {{- if .Values.persistence.enabled }}
+        volumeMounts:
+        - mountPath: /opt/hoop/sessions
+          name: walsessions
+        {{- end }}
         lifecycle:
           preStop:
             exec:
