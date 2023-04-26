@@ -13,7 +13,6 @@ Installing latest version of hoop. For different version check out the [releases
 > Please refer to [gateway configuration reference](https://hoop.dev/docs/configuring/gateway) for more information
 
 ```sh
-
 cat - > ./values.yaml <<EOF
 # use latest docker image or pin the version
 image:
@@ -95,3 +94,23 @@ helm upgrade --install hoopagent https://hoopartifacts.s3.amazonaws.com/release/
 
 > The gRPC url of our SaaS instance is configured as https://app.hoop.dev:8443.
 > If you have your own gateway, provide a valid public address for the option `config.gateway.grpc_url`
+
+## Development
+
+To add new configuration(s)
+
+1. Go to `./chart/gateway|agent/templates/secrets-config.yaml`
+2. Add any relevant environment variables
+3. Edit `./chart/gateway|agent/values.yaml` and add defaults or any necessary comment
+
+Test it by running
+
+```sh
+helm template ./chart/<component>/ -f yourvalues.yaml
+```
+
+Use helm lint to see if everything is ok
+
+```sh
+helm lint ./chart/<component>/ -f yourvalues.yaml
+```
