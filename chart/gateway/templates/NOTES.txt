@@ -3,4 +3,4 @@ Gateway deployed
 Visit {{ .Values.config.API_URL }} to begin.
 
 Documentation:
-https://hoop.dev/docs/configuring/gateway
+https://hoop.dev/docs

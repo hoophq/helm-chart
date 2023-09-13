@@ -17,8 +17,10 @@ config:
   # 0|1|2
   LOG_GRPC: '0'
   gateway: {}
-  #   grpc_url: ''
+  #   dsn: ''
   #   tls_server_name: ''
+  # DEPRECATED attributes
+  #   grpc_url: ''
   #   token: ''
 
 # -- Deployment strategy
