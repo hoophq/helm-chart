@@ -2,6 +2,8 @@
 ## This is a YAML-formatted file.
 ## Declare variables to be passed into your templates.
 
+# Refer to this guide for more details: https://hoop.dev/docs/self-hosting/kubernetes
+
 image:
   gw:
     repository: hoophq/hoop
@@ -17,7 +19,6 @@ image:
     tag: latest
 
 
-# hoop agent configuration. Please refer to https://hoop.dev/docs/configuring/agent
 agentConfig:
   # enables a sidecar agent to the gateway.
   # it must be able to auto register itself or connect it using a grpc_url and token
@@ -32,7 +33,7 @@ agentConfig:
   #   tls_server_name: ''
   #   token: ''
 
-# hoop gateway configuration. Please refer to https://hoop.dev/docs/configuring/gateway
+# hoop gateway configuration. Please refer to https://hoop.dev/docs/self-hosting
 config:
   API_URL: null
   IDP_ISSUER: null
