@@ -18,7 +18,6 @@ image:
     pullPolicy: Always
     tag: latest
 
-
 agentConfig:
   # enables a sidecar agent to the gateway.
   # it must be able to auto register itself or connect it using a grpc_url and token
@@ -52,9 +51,11 @@ config:
   # SMTP_PORT: ''
   # SMTP_USER: ''
   # SMTP_PASS: ''
+  # SLACK_CLIENT_ID: ''
+  # SLACK_CLIENT_SECRET: ''
   notification: {}
-    # slackBotToken: ''
-    # bridgeUrl: ''
+  #   slackBotToken: ''
+  #   bridgeUrl: ''
 
 # hoop gateway configuration. Please refer to https://hoop.dev/docs/configuring/gateway
 xtdbConfig:
@@ -67,7 +68,7 @@ xtdbConfig:
   ROCKS_DB_CACHE_SIZE: '536870912' # 512MB
   ROCKS_DB_DIR: '/opt/hoop/sessions/rocksdb'
   # JVM_OPTS: ''
-  
+
 ingressApi:
   # -- Enables Ingress
   enabled: false
