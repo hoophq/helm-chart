@@ -34,6 +34,7 @@ agentConfig:
 
 # hoop gateway configuration. Please refer to https://hoop.dev/docs/self-hosting
 config:
+  POSTGRES_DB_URI: ''
   API_URL: null
   IDP_ISSUER: null
   IDP_CLIENT_ID: null
@@ -57,7 +58,7 @@ config:
   #   slackBotToken: ''
   #   bridgeUrl: ''
 
-# hoop gateway configuration. Please refer to https://hoop.dev/docs/configuring/gateway
+# DEPRECATED: user config.POSTGRES_DB_URI instead
 xtdbConfig:
   PG_HOST: null
   PG_PORT: '5432'
@@ -118,10 +119,10 @@ resources:
     requests:
       cpu: 1024m
       memory: 1Gi
-  # gw:
-  #   limits:
-  #     cpu: 1024m
-  #     memory: 1Gi
-  #   requests:
-  #     cpu: 1024m
-  #     memory: 1Gi
+  gw:
+    limits:
+      cpu: 2048m
+      memory: 2Gi
+    requests:
+      cpu: 512m
+      memory: 2Gi
