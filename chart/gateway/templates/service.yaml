@@ -14,12 +14,3 @@ spec:
       name: http
       protocol: TCP
       targetPort: 8009
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: hoopdb
-spec:
-  externalName: "{{ required "xtdbConfig.PG_HOST is required" .Values.xtdbConfig.PG_HOST }}"
-  sessionAffinity: None
-  type: ExternalName

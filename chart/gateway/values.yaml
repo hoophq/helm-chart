@@ -9,10 +9,6 @@ image:
     repository: hoophq/hoop
     pullPolicy: Always
     tag: latest
-  xtdb:
-    repository: hoophq/xtdb
-    pullPolicy: Always
-    tag: latest
   agent:
     repository: hoophq/hoopdev
     pullPolicy: Always
@@ -58,18 +54,6 @@ config:
   #   slackBotToken: ''
   #   bridgeUrl: ''
 
-# DEPRECATED: user config.POSTGRES_DB_URI instead
-xtdbConfig:
-  PG_HOST: null
-  PG_PORT: '5432'
-  PG_USER: null
-  PG_PASSWORD: null
-  PG_DB: null
-  LISTEN_ADDR: '127.0.0.1'
-  ROCKS_DB_CACHE_SIZE: '536870912' # 512MB
-  ROCKS_DB_DIR: '/opt/hoop/sessions/rocksdb'
-  # JVM_OPTS: ''
-
 ingressApi:
   # -- Enables Ingress
   enabled: false
@@ -111,18 +95,10 @@ deploymentStrategy:
 
 # -- CPU/Memory resource requests/limits
 resources:
-  # xtdb requires a default requests/limits to avoid crashes
-  xtdb:
-    limits:
-      cpu: 1024m
-      memory: 1Gi
-    requests:
-      cpu: 1024m
-      memory: 1Gi
   gw:
     limits:
       cpu: 2048m
-      memory: 2Gi
+      memory: 1Gi
     requests:
       cpu: 512m
-      memory: 2Gi
+      memory: 1Gi

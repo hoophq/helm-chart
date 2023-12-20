@@ -18,31 +18,17 @@ cat - > ./values.yaml <<EOF
 image:
   gw:
     tag: latest
-  xtdb:
-    tag: latest
   agent:
     tag: latest
 
 # gateway configuration
 config:
+  POSTGRES_DB_URI: ''
   API_URL: ''
   IDP_ISSUER: ''
   IDP_CLIENT_ID: ''
   IDP_CLIENT_SECRET: ''
   IDP_AUDIENCE: ''
-
-# enable a default agent running as a sidecard in the gateway
-agentConfig:
-  enabled: true
-  AUTO_REGISTER: 'true'
-
-# gateway database configuration
-xtdbConfig:
-  PG_HOST: ''
-  PG_PORT: '5432'
-  PG_USER: ''
-  PG_PASSWORD: ''
-  PG_DB: ''
 
 # gateway persistence for audits
 persistence:

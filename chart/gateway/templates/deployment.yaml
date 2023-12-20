@@ -27,8 +27,6 @@ spec:
         envFrom:
         - secretRef:
             name: hoop-config
-        - secretRef:
-            name: xtdb-config
         resources:
           {{- toYaml .Values.resources.gw | nindent 10 }}
         {{- if .Values.persistence.enabled }}
@@ -41,26 +39,6 @@ spec:
           name: grpc
         - containerPort: 8009
           name: api
-      - image: "{{ .Values.image.xtdb.repository }}:{{ .Values.image.xtdb.tag }}"
-        name: xtdb
-        imagePullPolicy: {{ .Values.image.xtdb.pullPolicy }}
-        envFrom:
-        - secretRef:
-            name: xtdb-config
-        resources:
-          {{- toYaml .Values.resources.xtdb | nindent 10 }}
-        ports:
-        - containerPort: 3001
-          name: api
-        {{- if .Values.persistence.enabled }}
-        volumeMounts:
-        - mountPath: /opt/hoop/sessions
-          name: walsessions
-        {{- end }}
-        lifecycle:
-          preStop:
-            exec:
-              command: ["/bin/sh","-c","until stat /tmp/xtdb-shutdown.placeholder 2>/dev/null; do sleep 1; done"]
       {{- if and .Values.agentConfig.enabled }}
       - image: "{{ .Values.image.agent.repository }}:{{ .Values.image.agent.tag }}"
         name: defaultagent
