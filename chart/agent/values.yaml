@@ -17,7 +17,7 @@ config:
   # 0|1|2
   LOG_GRPC: '0'
   gateway: {}
-  #   dsn: ''
+  #   key: ''
   #   tls_server_name: ''
   # DEPRECATED attributes
   #   grpc_url: ''
