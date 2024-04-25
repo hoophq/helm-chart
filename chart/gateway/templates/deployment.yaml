@@ -17,9 +17,9 @@ spec:
         app: hoopgateway
     spec:
       containers:
-      - image: "{{ .Values.image.gw.repository }}:{{ .Values.image.gw.tag }}"
+      - image: '{{ .Values.image.gw.repository | default "hoophq/hoop" }}:{{ .Values.image.gw.tag | default "latest" }}'
         name: hoopgateway
-        imagePullPolicy: {{ .Values.image.gw.pullPolicy }}
+        imagePullPolicy: {{ .Values.image.gw.pullPolicy | default "Always" }}
         args:
         - hoop
         - start
@@ -39,11 +39,11 @@ spec:
           name: grpc
         - containerPort: 8009
           name: api
-      {{- if and .Values.agentConfig.enabled }}
-      - image: "{{ .Values.image.agent.repository }}:{{ .Values.image.agent.tag }}"
+      {{- with .Values.agentConfig }}
+      - image: '{{ .imageRepository |default "hoophq/hoopdev" }}:{{ .imageTag |default "latest" }}'
         name: defaultagent
-        imagePullPolicy: {{ .Values.image.agent.pullPolicy }}
-        {{- if .Values.persistence.enabled }}
+        imagePullPolicy: {{ .imagePullPolicy | default "Always" }}
+        {{- if $.Values.persistence.enabled }}
         volumeMounts:
         - mountPath: /opt/hoop/sessions
           name: walsessions
@@ -58,3 +58,15 @@ spec:
         persistentVolumeClaim:
           claimName: {{ .Values.persistence.existingClaim | default "walsessions" }}
       {{ end -}}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

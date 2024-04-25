@@ -3,83 +3,46 @@
 - Website: https://hoop.dev
 - Documentation: https://hoop.dev/docs
 
-[Helm](https://helm.sh) must be installed to use the chart.
+[Helm](https://helm.sh) must be installed to use this chart.
 Please refer to Helm's [documentation](https://helm.sh/docs/) to get started.
 
 ## Installing Self Hosted
 
 Installing latest version of hoop. For different version check out the [releases page](https://github.com/hoophq/hoopcli/releases)
 
-> Please refer to [gateway configuration reference](https://hoop.dev/docs/configuring/gateway) for more information
+> Please refer to [gateway configuration reference](https://hoop.dev/docs/configuring/gateway)
+> and [Kubernetes configuration](https://hoop.dev/docs/self-hosting/kubernetes) for more information.
+
+The example below are the minimal requirements to deploy the gateway:
 
 ```sh
 cat - > ./values.yaml <<EOF
-# use latest docker image or pin the version
-image:
-  gw:
-    tag: latest
-  agent:
-    tag: latest
-
-# gateway configuration
+# gateway base configuration
 config:
-  POSTGRES_DB_URI: ''
-  API_URL: ''
-  IDP_ISSUER: ''
-  IDP_CLIENT_ID: ''
-  IDP_CLIENT_SECRET: ''
-  IDP_AUDIENCE: ''
-
-# gateway persistence for audits
-persistence:
-  enabled: false
-  storageClassName: ''
-
-# enable ingress for the api / webapp services
-ingressApi:
-  enabled: false
-  ingressClassName: nginx
-  annotations: {}
-    # kubernetes.io/tls-acme: "true"
-
-  host: hoop.yourdomain.tld
-  # -- TLS secret name for nginx ingress
-  # tlsSecret: ''
-
-# enable ingress for the gRPC service
-ingressGrpc:
-  enabled: false
-  ingressClassName: nginx
-  annotations: {}
-    # kubernetes.io/tls-acme: "true"
-
-  host: hoop.yourdomain.tld
-  # -- TLS secret name for nginx ingress
-  # tlsSecret: ''
+  POSTGRES_DB_URI: 'postgres://<user>:<pwd>@<db-host>:<port>/<dbname>'
+  API_URL: 'https://hoopdev.yourdomain.tld'
+  IDP_CLIENT_ID: 'client-id'
+  IDP_CLIENT_SECRET: 'client-secret'
+  IDP_ISSUER: 'https://idp-issuer-url'
 EOF
 ```
 
 ```sh
-VERSION=$(curl -s https://hoopartifacts.s3.amazonaws.com/release/latest.txt)
+VERSION=$(curl -s https://releases.hoop.dev/release/latest.txt)
 helm upgrade --install hoop \
-  https://hoopartifacts.s3.amazonaws.com/release/$VERSION/hoop-chart-$VERSION.tgz \
+  https://releases.hoop.dev/release/$VERSION/hoop-chart-$VERSION.tgz \
   -f values.yaml
 ```
 
 ## Installing Hoop Agent
 
-Please refer to [agent configuration reference](https://hoop.dev/docs/configuring/agent) for more information.
+Please refer to [agent configuration reference](https://hoop.dev/docs/setup/kubernetes) for more information.
 
 ```sh
-VERSION=$(curl -s https://hoopartifacts.s3.amazonaws.com/release/latest.txt)
-helm upgrade --install hoopagent https://hoopartifacts.s3.amazonaws.com/release/$VERSION/hoopagent-chart-$VERSION.tgz \
-    --set 'config.gateway.grpc_url=' \
-    --set 'config.gateway.token='
+VERSION=$(curl -s https://releases.hoop.dev/release/latest.txt)
+helm upgrade --install hoopagent https://releases.hoop.dev/release/$VERSION/hoopagent-chart-$VERSION.tgz \
+    --set 'config.HOOP_KEY='
 ```
-
-
-> The gRPC url of our SaaS instance is configured as https://app.hoop.dev:8443.
-> If you have your own gateway, provide a valid public address for the option `config.gateway.grpc_url`
 
 ## Development
 

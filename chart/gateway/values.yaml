@@ -4,29 +4,22 @@
 
 # Refer to this guide for more details: https://hoop.dev/docs/self-hosting/kubernetes
 
+# -- Define a custom image configuration
 image:
-  gw:
-    repository: hoophq/hoop
-    pullPolicy: Always
-    tag: latest
-  agent:
-    repository: hoophq/hoopdev
-    pullPolicy: Always
-    tag: latest
+  gw: {}
+  #   repository: hoophq/hoop
+  #   pullPolicy: Always
+  #   tag: latest
 
-agentConfig:
-  # enables a sidecar agent to the gateway.
-  # it must be able to auto register itself or connect it using a grpc_url and token
-  enabled: false
-  AUTO_REGISTER: ''
-  # debug|info|warn|error
-  LOG_LEVEL: info
-  # 0|1|2
-  LOG_GRPC: '0'
-  gateway: {}
-  #   grpc_url: ''
-  #   tls_server_name: ''
-  #   token: ''
+# -- Enable an agent sidecar
+agentConfig: {}
+  # HOOP_KEY: '<AUTH_KEY>'
+  # LOG_ENCODING: 'console|json'
+  # LOG_LEVEL: 'debug|info|warn|error'
+  # LOG_GRPC: '0|1|2'
+  # imageRepository: 'hoophq/hoopdev'
+  # imageTag: latest
+  # imagePullPolicy: Always
 
 # hoop gateway configuration. Please refer to https://hoop.dev/docs/self-hosting
 config:
@@ -80,6 +73,7 @@ ingressGrpc:
   # -- TLS secret name for nginx ingress
   # tlsSecret: ''
 
+# -- Define persistence to sessions
 persistence:
   # -- Use persistent volume for write ahead log sessions
   enabled: false
@@ -92,6 +86,15 @@ persistence:
 # -- Deployment strategy
 deploymentStrategy:
   type: Recreate
+
+# -- Node labels for pod assignment
+nodeSelector: {}
+
+# -- Toleration labels for pod assignment
+tolerations: []
+
+# -- Affinity settings for pod assignment
+affinity: {}
 
 # -- CPU/Memory resource requests/limits
 resources:
