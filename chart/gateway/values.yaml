@@ -4,12 +4,14 @@
 
 # Refer to this guide for more details: https://hoop.dev/docs/self-hosting/kubernetes
 
+# -- Define a custom image configuration
 image:
   gw: {}
   #   repository: hoophq/hoop
   #   pullPolicy: Always
   #   tag: latest
 
+# -- Enable an agent sidecar
 agentConfig: {}
   # HOOP_KEY: '<AUTH_KEY>'
   # LOG_ENCODING: 'console|json'
@@ -71,6 +73,7 @@ ingressGrpc:
   # -- TLS secret name for nginx ingress
   # tlsSecret: ''
 
+# -- Define persistence to sessions
 persistence:
   # -- Use persistent volume for write ahead log sessions
   enabled: false
