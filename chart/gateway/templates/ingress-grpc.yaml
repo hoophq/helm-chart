@@ -18,7 +18,7 @@ metadata:
 spec:
   ingressClassName: {{ required "ingressGrpc.ingressClassName is required" .Values.ingressGrpc.ingressClassName | quote }}
   rules:
-  - host: {{ required "ingressGrpc.host is required" .Values.ingressGrpc.host | quote }}
+  - host: {{ .Values.ingressGrpc.host | quote }}
     http:
       paths:
       - backend:
@@ -27,10 +27,8 @@ spec:
             port:
               number: 8010
         pathType: ImplementationSpecific
-  {{- if .Values.ingressGrpc.tlsSecret }}
+  {{- with .Values.ingressGrpc.tls }}
   tls:
-  - secretName: {{ .Values.ingressGrpc.tlsSecret }}
-    hosts:
-      - {{ .Values.ingressGrpc.host }}
+  {{- toYaml . | nindent 2 }}
   {{- end }}
 {{- end }}

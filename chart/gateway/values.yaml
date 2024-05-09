@@ -57,8 +57,12 @@ ingressApi:
 
   # -- Ingress hostname for API
   # host: hoop.yourdomain.tld
-  # -- TLS secret name for nginx ingress
-  # tlsSecret: ''
+  # -- TLS configuration
+  # tls:
+  # - hosts:
+  #   - api01.domain.tld
+  #   - api02.domain.tld
+
 
 ingressGrpc:
   # -- Enables Ingress
@@ -70,8 +74,11 @@ ingressGrpc:
 
   # -- Ingress hostname for gRPC
   # host: hoop.yourdomain.tld
-  # -- TLS secret name for nginx ingress
-  # tlsSecret: ''
+  # -- TLS configuration
+  # tls:
+  # - hosts:
+  #   - grpc01.domain.tld
+  #   - grpc02.domain.tld
 
 # -- Define persistence to sessions
 persistence:
