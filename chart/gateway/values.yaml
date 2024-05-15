@@ -33,16 +33,12 @@ config:
   # LOG_ENCODING: 'console|json'
   # LOG_LEVEL: 'debug|info|warn|error'
   # LOG_GRPC: "0|1|2"
+  # ASK_AI_CREDENTIALS: ''
+  # GOOGLE_APPLICATION_CREDENTIALS_JSON: ''
   # IDP_AUDIENCE: ''
   # IDP_CUSTOM_SCOPES: ''
   # PLUGIN_AUDIT_PATH: ''
   # PLUGIN_INDEX_PATH: ''
-  # SMTP_HOST: ''
-  # SMTP_PORT: ''
-  # SMTP_USER: ''
-  # SMTP_PASS: ''
-  # SLACK_CLIENT_ID: ''
-  # SLACK_CLIENT_SECRET: ''
   notification: {}
   #   slackBotToken: ''
   #   bridgeUrl: ''
