@@ -24,9 +24,13 @@ agentConfig: {}
 # hoop gateway configuration. Please refer to https://hoop.dev/docs/self-hosting
 config:
   POSTGRES_DB_URI: ''
-  API_URL: null
+  # API_URL: 'yourdomain.tld'
   IDP_URI: null
   IDP_AUDIENCE: null
+  IDP_ISSUER: null
+  IDP_CLIENT_ID: null
+  IDP_CLIENT_SECRET: null
+  IDP_CUSTOM_SCOPES: null
   # LOG_ENCODING: 'console|json'
   # LOG_LEVEL: 'debug|info|warn|error'
   # LOG_GRPC: "0|1|2"
